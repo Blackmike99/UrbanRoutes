@@ -154,14 +154,6 @@ class UrbanRoutesPage:
     def wait_for_driver_information(self):
         WebDriverWait(self.driver, 35).until((expected_conditions.visibility_of_element_located(self.driver_photo)))
 
-    def taxi_call_button_process(self):
-        self.wait_for_personal_button()
-        self.personal_button_click()
-        self.wait_for_taxi_button()
-        self.taxi_button_click()
-        self.wait_for_taxi_call_button()
-        self.taxi_call_button_click()
-
     def comfort_button_click(self):
         self.driver.find_element(*self.comfort_Button).click()
 
@@ -193,7 +185,6 @@ class UrbanRoutesPage:
         self.driver.find_element(*self.close_card_selection).click()
 
     def link_card_button_click(self):
-
         self.driver.find_element(*self.link_card_button).click()
 
     def tissues_slider_click(self):
@@ -205,6 +196,14 @@ class UrbanRoutesPage:
 
     def reserve_taxi_click(self):
         self.driver.find_element(*self.reserve_taxi_button).click()
+
+    def taxi_call_button_process(self):
+        self.wait_for_personal_button()
+        self.personal_button_click()
+        self.wait_for_taxi_button()
+        self.taxi_button_click()
+        self.wait_for_taxi_call_button()
+        self.taxi_call_button_click()
 
     def code_process(self):
         self.wait_for_code_field()
