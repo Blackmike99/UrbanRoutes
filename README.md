@@ -21,6 +21,12 @@ como también tener instalado selenium con su driver de chrome actualizado.
 También es necesario tener la librería pytest instalada.
 
 
+### urban_routes_page
+Archivo que contiene la clase con los localizadores, metodos y pasos para su uso en las pruebas
+
+### helpers
+Archivo que contiene la función retrieve_phone_code para obtener el numero de confirmacion de telefono 
+durante las pruebas
 
 ### retrieve_phone_code
 
@@ -114,7 +120,7 @@ Retorna el valor actualmente escrito en la casilla de fin de viaje.
 
 ##### def get_phone_number
 
-Retorna el valor actualmente escrito en la casilla de número de teléfono.
+Retorna el valor guardado en la casilla de número de teléfono.
 
 
 
@@ -338,13 +344,13 @@ Checa sé el slider de manta y pañuelos está activado.
 
 ##### def check_ice_cream_counter_is_enabled
 
-Checa que el botón de helados exista mediante la comparación del nombre de su clase con la actual.
+Checa que el contador registre el numero de helados correctamente "2".
 
 
 
-##### def check_reservation_details_button_is_enabled
+##### def check_reservation_panel_is_enabled
 
-Checa que el botón de reserva exista mediante la comparación del nombre de su clase con la actual.
+Checa que el panel de reserva exista mediante la comparación del nombre de clase de su titulo con la actual.
 
 
 

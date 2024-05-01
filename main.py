@@ -39,11 +39,11 @@ class TestUrbanRoutes:
         routes_page.wait_for_phone_field()
         phone = data.phone_number
         routes_page.set_phone_number(phone)
-        assert routes_page.get_phone_number() == phone
         routes_page.add_phone_button_click()
         routes_page.code_process()
         code = routes_page.get_phone_code()
         assert routes_page.get_phone_code() == code
+        assert routes_page.get_phone_number() == phone
 
     def test_add_card(self):
         routes_page = urban_routes_page.UrbanRoutesPage(self.driver)
@@ -70,18 +70,16 @@ class TestUrbanRoutes:
 
     def test_ice_cream_button(self):
         routes_page = urban_routes_page.UrbanRoutesPage(self.driver)
-        counter_button_active = data.ice_cream_button_enabled
-        counter_button_deactivated = data.ice_cream_button_disabled
-        assert routes_page.check_ice_cream_counter_is_enabled() == counter_button_active
+        counter_active = data.ice_cream_counter_enabled
         routes_page.ice_cream_counter_click()
-        assert routes_page.check_ice_cream_counter_is_enabled() == counter_button_deactivated
+        assert routes_page.check_ice_cream_counter_is_enabled() == counter_active
 
     def test_modal_is_enabled(self):
         routes_page = urban_routes_page.UrbanRoutesPage(self.driver)
         routes_page.reserve_taxi_click()
-        routes_page.wait_for_cancel_reservation_button()
-        reservation_button_class = data.reservation_button_class
-        assert routes_page.check_reservation_details_button_is_enabled() == reservation_button_class
+        routes_page.wait_for_cancel_reservation_panel()
+        reservation_panel_class = data.reservation_panel_class
+        assert routes_page.check_reservation_panel_is_enabled() == reservation_panel_class
 
     def test_driver_information(self):
         routes_page = urban_routes_page.UrbanRoutesPage(self.driver)

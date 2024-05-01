@@ -18,6 +18,7 @@ class UrbanRoutesPage:
     phone_number_button = (By.CLASS_NAME, "np-button")
     phone_field = (By.ID, 'phone')
     add_phone_button = (By.XPATH, '//button[text()="Siguiente"]')
+    confirmed_phone_field = (By.CLASS_NAME, 'np-text')
     code_field = (By.ID, 'code')
     code_confirm_button = (By.XPATH, '//button[text()="Confirmar"]')
     card_button = (By.CSS_SELECTOR, '.pp-button.filled')
@@ -25,16 +26,15 @@ class UrbanRoutesPage:
     card_field = (By.ID, 'number')
     card_code_field = (By.CSS_SELECTOR, "input[placeholder='12']")
     link_card_button = (By.XPATH, '//button[text()="Agregar"]')
-    close_card_selection = (By.XPATH, '/html/body/div/div/div[2]/div[2]/div[1]/button')
+    close_card_selection = (By.XPATH, "//div[@class='payment-picker open']//button['close-button section-close']")
     card_selection = (By.CLASS_NAME, 'pp-checkbox')
     message_field = (By.ID, 'comment')
-    blanket_and_tissues_slider = (By.XPATH, '//*[@id="root"]/div/div[3]/div[3]/div[2]/div'
-                                            '[2]/div[4]/div[2]/div[1]/div/div[2]/div/span')
+    blanket_and_tissues_slider = (By.CSS_SELECTOR, 'span[class="slider round"')
     ice_cream_plus_counter = (By.CLASS_NAME, 'counter-plus')
     ice_cream_counter = (By.CLASS_NAME, 'counter-value')
     reserve_taxi_button = (By.CLASS_NAME, 'smart-button')
-    reservation_details_button = (By.XPATH, '//*[@id="root"]/div/div[5]/div[2]/div[2]/div[1]/div[2]/button')
-    driver_photo = (By.XPATH, '//*[@id="root"]/div/div[5]/div[2]/div[2]/div[1]/div[1]/div[1]/img')
+    reservation_panel_tittle = (By.XPATH, '//div[text()="Buscar automóvil"]')
+    driver_photo = (By.CSS_SELECTOR, 'img[src="/static/media/bender.e90e5089.svg"]')
 
     def __init__(self, driver):
         self.driver = driver
@@ -69,7 +69,7 @@ class UrbanRoutesPage:
         return self.driver.find_element(*self.to_field).get_property('value')
 
     def get_phone_number(self):
-        return self.driver.find_element(*self.phone_field).get_property('value')
+        return self.driver.find_element(*self.confirmed_phone_field).text
 
     def get_phone_code(self):
         return self.driver.find_element(*self.code_field).get_property('value')
@@ -117,9 +117,9 @@ class UrbanRoutesPage:
     def wait_for_add_card_button(self):
         WebDriverWait(self.driver, 3).until((expected_conditions.visibility_of_element_located(self.add_card_button)))
 
-    def wait_for_cancel_reservation_button(self):
+    def wait_for_cancel_reservation_panel(self):
         WebDriverWait(self.driver, 3).until((expected_conditions.visibility_of_element_located
-                                             (self.reservation_details_button)))
+                                             (self.reservation_panel_tittle)))
 
     def wait_for_driver_information(self):
         WebDriverWait(self.driver, 35).until((expected_conditions.visibility_of_element_located(self.driver_photo)))
@@ -194,10 +194,10 @@ class UrbanRoutesPage:
         return self.driver.find_element(*self.blanket_and_tissues_slider).is_enabled()
 
     def check_ice_cream_counter_is_enabled(self):
-        return self.driver.find_element(*self.ice_cream_plus_counter).get_attribute('class')
+        return self.driver.find_element(*self.ice_cream_counter).text
 
-    def check_reservation_details_button_is_enabled(self):
-        return self.driver.find_element(*self.reservation_details_button).get_attribute('class')
+    def check_reservation_panel_is_enabled(self):
+        return self.driver.find_element(*self.reservation_panel_tittle).get_attribute('class')
 
     def check_comfort_button_is_enabled(self):
         return self.driver.find_element(*self.comfort_Button).get_attribute('alt')
