@@ -350,7 +350,7 @@ Checa que el botón de reserva exista mediante la comparación del nombre de su 
 
 ##### def check_comfort_button_is_enabled
 
-Checa que el botón de la tarifa comfort exista mediante la comparación del nombre de su clase con la actual.
+Checa que el botón de la tarifa comfort exista mediante la comparación de su atributo 'alt' con el actual.
 
 
 

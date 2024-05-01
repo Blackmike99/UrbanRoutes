@@ -10,23 +10,23 @@ class UrbanRoutesPage:
     from_field = (By.ID, 'from')
     to_field = (By.ID, 'to')
     urban_logo = (By.CLASS_NAME, 'logo-image')
-    personal_button = (By.XPATH, '//*[@id="root"]/div/div[3]/div[3]/div[1]/div[1]/div[3]')
-    taxi_button = (By.XPATH, '//*[@id="root"]/div/div[3]/div[3]/div[1]/div[2]/div[3]/img')
-    taxi_call_button = (By.XPATH, '//*[@id="root"]/div/div[3]/div[3]/div[1]/div[3]/div[1]/button')
-    tariff_picker = (By.XPATH, '//*[@id="root"]/div/div[3]/div[3]/div[2]')
-    comfort_Button = (By.XPATH, '//*[@id="root"]/div/div[3]/div[3]/div[2]/div[1]/div[5]')
+    personal_button = (By.XPATH, '//div[text()="Personal"]')
+    taxi_button = (By.CSS_SELECTOR, 'img[src="/static/media/taxi-active.b0be3054.svg"]')
+    taxi_call_button = (By.XPATH, '//button[text()="Pedir un taxi"]')
+    tariff_picker = (By.CLASS_NAME, 'tariff-cards')
+    comfort_Button = (By.CSS_SELECTOR, 'img[src="/static/media/kids.075fd8d4.svg"]')
     phone_number_button = (By.CLASS_NAME, "np-button")
     phone_field = (By.ID, 'phone')
-    add_phone_button = (By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div[1]/form/div[2]/button')
+    add_phone_button = (By.XPATH, '//button[text()="Siguiente"]')
     code_field = (By.ID, 'code')
-    code_confirm_button = (By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div[2]/form/div[2]/button[1]')
+    code_confirm_button = (By.XPATH, '//button[text()="Confirmar"]')
     card_button = (By.CSS_SELECTOR, '.pp-button.filled')
     add_card_button = (By.CSS_SELECTOR, '.pp-row.disabled')
     card_field = (By.ID, 'number')
     card_code_field = (By.CSS_SELECTOR, "input[placeholder='12']")
-    link_card_button = (By.XPATH, '//*[@id="root"]/div/div[2]/div[2]/div[2]/form/div[3]/button[1]')
-    close_card_selection = (By.XPATH, "/html/body/div/div/div[2]/div[2]/div[1]/button")
-    card_selection = (By.XPATH, '//*[@id="root"]/div/div[2]/div[2]/div[1]')
+    link_card_button = (By.XPATH, '//button[text()="Agregar"]')
+    close_card_selection = (By.XPATH, '/html/body/div/div/div[2]/div[2]/div[1]/button')
+    card_selection = (By.CLASS_NAME, 'pp-checkbox')
     message_field = (By.ID, 'comment')
     blanket_and_tissues_slider = (By.XPATH, '//*[@id="root"]/div/div[3]/div[3]/div[2]/div'
                                             '[2]/div[4]/div[2]/div[1]/div/div[2]/div/span')
@@ -118,7 +118,8 @@ class UrbanRoutesPage:
         WebDriverWait(self.driver, 3).until((expected_conditions.visibility_of_element_located(self.add_card_button)))
 
     def wait_for_cancel_reservation_button(self):
-        WebDriverWait(self.driver, 3).until((expected_conditions.visibility_of_element_located(self.reservation_details_button)))
+        WebDriverWait(self.driver, 3).until((expected_conditions.visibility_of_element_located
+                                             (self.reservation_details_button)))
 
     def wait_for_driver_information(self):
         WebDriverWait(self.driver, 35).until((expected_conditions.visibility_of_element_located(self.driver_photo)))
@@ -199,7 +200,7 @@ class UrbanRoutesPage:
         return self.driver.find_element(*self.reservation_details_button).get_attribute('class')
 
     def check_comfort_button_is_enabled(self):
-        return self.driver.find_element(*self.comfort_Button).get_attribute('class')
+        return self.driver.find_element(*self.comfort_Button).get_attribute('alt')
 
     def check_driver_information_appears(self):
         return self.driver.find_element(*self.driver_photo).get_attribute("alt")
